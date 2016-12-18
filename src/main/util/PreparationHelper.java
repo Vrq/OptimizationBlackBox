@@ -50,11 +50,12 @@ public class PreparationHelper {
     }
 
     public static void loadDataSet(Enum dataSet) {
-        PreparationHelper.dataSetName = dataSet.DATA_SET_NAME;
-        DataLoader dataLoader = new DataLoader(constants.getResourcesDir());
-        PreparationHelper.alternativesList = dataLoader.getDataListFromCSV(dataSet.ALTERNATIVES_FILE_NAME);
-        PreparationHelper.criteriaList = dataLoader.getDataListFromCSV(dataSet.CRITERIA_FILE_NAME);
-        PreparationHelper.performanceTable = dataLoader.getPerformanceTableFromCSV(dataSet.PERFORMANCE_TABLE_FILE_NAME);
+//        PreparationHelper.dataSetName = dataSet.DATA_SET_NAME;
+//        DataLoader dataLoader = new DataLoader(constants.getResourcesDir());
+//        PreparationHelper.alternativesList = dataLoader.getDataListFromCSV(dataSet.ALTERNATIVES_FILE_NAME);
+//        PreparationHelper.criteriaList = dataLoader.getDataListFromCSV(dataSet.CRITERIA_FILE_NAME);
+//        PreparationHelper.performanceTable = dataLoader.getPerformanceTableFromCSV(dataSet.PERFORMANCE_TABLE_FILE_NAME);
+//
     }
 
     public static void printLoadedData() {
