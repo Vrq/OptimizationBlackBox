@@ -3,7 +3,9 @@
     <output-path>$PROJECT_DIR$/out/artifacts/OptimizationBlackBox</output-path>
     <root id="archive" name="OptimizationBlackBox.jar">
       <element id="module-output" name="projektOptymalizacja" />
-      <element id="library" level="project" name="junit:junit:4.12" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/out/production/projektOptymalizacja/META-INF/MANIFEST.MF" />
+      </element>
     </root>
   </artifact>
 </component>

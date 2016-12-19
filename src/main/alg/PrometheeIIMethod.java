@@ -48,7 +48,7 @@ public class PrometheeIIMethod {
         }
     }
 
-    double getPreferenceValueForAlternative(String alternative, String alternativeY) {
+    double getPreferenceValueFor(String alternative, String alternativeY) {
         double preferenceSum = 0;
         for(String criterion : criteriaList) {
             preferenceSum += criteriaWeightsMap.get(criterion)*getPreferenceValueForCriterion(alternative, alternativeY, criterion);
@@ -56,30 +56,30 @@ public class PrometheeIIMethod {
         return preferenceSum/weightsSumValue;
     }
 
-    double getPositiveFlowValue(String alternative) {
+    double getPositiveFlowValueFor(String alternative) {
         double positiveFlow = 0;
         for(String alternativeY : alternativesList) {
-            positiveFlow += getPreferenceValueForAlternative(alternative, alternativeY);
+            positiveFlow += getPreferenceValueFor(alternative, alternativeY);
         }
         return positiveFlow;
     }
 
-    double getNegativeFlow(String alternative) {
+    double getNegativeFlowFor(String alternative) {
         double negativeFlow = 0;
         for(String alternativeY : alternativesList) {
-            negativeFlow += getPreferenceValueForAlternative(alternativeY, alternative);
+            negativeFlow += getPreferenceValueFor(alternativeY, alternative);
         }
         return negativeFlow;
     }
 
-    double getNetFlow(String alternativeX) {
-        return getPositiveFlowValue(alternativeX) - getNegativeFlow(alternativeX);
+    double getNetFlowFor(String alternativeX) {
+        return getPositiveFlowValueFor(alternativeX) - getNegativeFlowFor(alternativeX);
     }
 
     public LinkedHashMap<String, Double> getAlternativesRanking()  {
         HashMap<String, Double> alternativesNetFlowValuesMap = new HashMap<>();
         for(String alternative : alternativesList) {
-            alternativesNetFlowValuesMap.put(alternative, getNetFlow(alternative));
+            alternativesNetFlowValuesMap.put(alternative, getNetFlowFor(alternative));
         }
         LinkedHashMap<String, Double> sortedAlternativesMap = sortMapByValue(alternativesNetFlowValuesMap);
         return sortedAlternativesMap;

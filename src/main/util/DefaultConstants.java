@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Varq on 2016-12-16.
  */
 public class DefaultConstants {
-    String resourcesDir = "src/main/resources/";
+    String resourcesDir = "resources/";
     String performanceTableFileName = "performanceTable.csv";
     String criteriaFileName = "criteria.csv";
     String alternativesFileName = "alternatives.csv";

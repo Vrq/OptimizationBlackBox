@@ -2,8 +2,9 @@ package main.util;
 
 import main.alg.PrometheeIIMethod;
 
+import java.io.File;
 import java.util.*;
-
+import main.util.Constants.FileName;
 /**
  * Created by jtomasik on 17/12/2016.
  */
@@ -37,7 +38,7 @@ public class PreparationHelper {
     }
 
 
-    public static void showMeTheMagic() {
+    public static void showPrometheeIIRunExample() {
         loadDefaultData();
         performExamplePrometheeIIRun();
     }
@@ -49,13 +50,13 @@ public class PreparationHelper {
         PreparationHelper.performanceTable = dataLoader.getPerformanceTableFromCSV(constants.getPerformanceTableFileName());
     }
 
-    public static void loadDataSet(Enum dataSet) {
-//        PreparationHelper.dataSetName = dataSet.DATA_SET_NAME;
-//        DataLoader dataLoader = new DataLoader(constants.getResourcesDir());
-//        PreparationHelper.alternativesList = dataLoader.getDataListFromCSV(dataSet.ALTERNATIVES_FILE_NAME);
-//        PreparationHelper.criteriaList = dataLoader.getDataListFromCSV(dataSet.CRITERIA_FILE_NAME);
-//        PreparationHelper.performanceTable = dataLoader.getPerformanceTableFromCSV(dataSet.PERFORMANCE_TABLE_FILE_NAME);
-//
+    public static void loadDataSet(HashMap<Enum<Constants.FileName>, String> dataSetMeta) {
+        PreparationHelper.dataSetName = dataSetMeta.get(FileName.DATASET);
+        DataLoader dataLoader = new DataLoader(constants.getResourcesDir());
+        PreparationHelper.alternativesList = dataLoader.getDataListFromCSV(dataSetMeta.get(FileName.ALTERNATIVES));
+        PreparationHelper.criteriaList = dataLoader.getDataListFromCSV(dataSetMeta.get(FileName.CRITERIA));
+        PreparationHelper.performanceTable = dataLoader.getPerformanceTableFromCSV(dataSetMeta.get(FileName.PERFORMANCE_TABLE));
+
     }
 
     public static void printLoadedData() {
