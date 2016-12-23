@@ -15,18 +15,32 @@ public class CLI {
         do {
             switch (userInput.nextLine()) {
                 case "1":
-                    PreparationHelper.showPrometheeIIRunExample();
+                    PreparationHelper.loadDefaultData();
+                    long startTime = System.currentTimeMillis();
+                    System.out.println("Performing Promethee II method in progress...");
+                    PreparationHelper.performExamplePrometheeIIRun();
+                    long stopTime = System.currentTimeMillis();
+                    double elapsedTimeSec = (stopTime - startTime)/1000d;
+                    System.out.println("\nPromethee II executed in: " + elapsedTimeSec + "s");
                     break;
                 case "2":
                     chooseDataSetFrom(userInput);
                     PreparationHelper.printLoadedData();
                     System.out.println("Data set successfully loaded");
                     getPrometheeIIParamsFromUser();
+                    startTime = System.currentTimeMillis();
+                    System.out.println("Performing Promethee II method in progress...");
                     PreparationHelper.runPrometheeIIMethod();
+                    stopTime = System.currentTimeMillis();
+                    elapsedTimeSec = (stopTime - startTime)/1000d;
+                    System.out.println("\nPromethee II executed in: " + elapsedTimeSec + "s");
                     break;
                 default:
                     System.out.println("Unknown command, please try again");
             }
+            System.out.println("\nBelow you can find the available commands:");
+            System.out.println("1 - Example optimization process");
+            System.out.println("2 - Custom optimization with own data sources");
             System.out.println("\nChoose your command and hit enter:");
         } while (userInput.hasNext());
     }

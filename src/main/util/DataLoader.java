@@ -25,7 +25,7 @@ public class DataLoader {
             Scanner inputStream = new Scanner(file);
             while (inputStream.hasNext()) {
                 String dataLine = inputStream.nextLine();
-                String[] dataLineArray = dataLine.split(",", -1);
+                String[] dataLineArray = dataLine.split("(,)|(;)", -1);
                 List<String> dataArrayList = Arrays.asList(dataLineArray);
                 dataMatrix.add(dataArrayList);
             }
@@ -43,7 +43,7 @@ public class DataLoader {
             Scanner inputStream = new Scanner(file);
             if(inputStream.hasNext()) {
                 String dataLine = inputStream.nextLine();
-                String[] dataLineArray = dataLine.split(",", -1);
+                String[] dataLineArray = dataLine.split("(,)|(;)", -1);
                 dataArray = Arrays.asList(dataLineArray);
             }
         } catch (FileNotFoundException e) {
@@ -60,7 +60,7 @@ public class DataLoader {
             Scanner inputStream = new Scanner(file);
             while (inputStream.hasNext()) {
                 String dataLine = inputStream.nextLine();
-                String[] dataLineArray = dataLine.split(",", -1);
+                String[] dataLineArray = dataLine.split("(,)|(;)", -1);
                 List<Double> dataValuesList = new ArrayList<>();
                 for(String value : dataLineArray) {
                     dataValuesList.add(Double.parseDouble(value));

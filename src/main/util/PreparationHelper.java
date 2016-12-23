@@ -3,6 +3,8 @@ package main.util;
 import main.alg.PrometheeIIMethod;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import main.util.Constants.FileName;
 /**
@@ -81,17 +83,12 @@ public class PreparationHelper {
         constants.setIndifferenceThresholdValuesMap(criteriaList);
         constants.setPreferenceThresholdValuesMap(criteriaList);
 
-        PrometheeIIMethod prometheeIIMethodInstance = new PrometheeIIMethod(criteriaList, alternativesList, performanceTable);
+        prometheeIIMethod = new PrometheeIIMethod(criteriaList, alternativesList, performanceTable);
+        prometheeIIMethod.setCriteriaWeightsMap(constants.getCriteriaWeightsMap());
+        prometheeIIMethod.setIndifferenceThresholdValuesMap(constants.getIndifferenceThresholdValuesMap());
+        prometheeIIMethod.setPreferenceThresholdValuesMap(constants.getPreferenceThresholdValuesMap());
 
-        prometheeIIMethodInstance.setCriteriaWeightsMap(constants.getCriteriaWeightsMap());
-        prometheeIIMethodInstance.setIndifferenceThresholdValuesMap(constants.getIndifferenceThresholdValuesMap());
-        prometheeIIMethodInstance.setPreferenceThresholdValuesMap(constants.getPreferenceThresholdValuesMap());
-
-        LinkedHashMap<String, Double> prometheeIIRankingMap = prometheeIIMethodInstance.getAlternativesRanking();
-
-        for (Map.Entry<String, Double> alternativeEntry : prometheeIIRankingMap.entrySet()) {
-            System.out.println("Alternative: " + alternativeEntry.getKey() + " netflow: " + alternativeEntry.getValue());
-        }
+        runPrometheeIIMethod();
     }
 
     public static void preparePrometheeIIRun(HashMap<String, Double> criteriaWeighthsMap, HashMap<String, Double> preferenceThresholdValuesMap, HashMap<String, Double> indifferenceThresholdValuesMap) {
@@ -104,7 +101,11 @@ public class PreparationHelper {
     public static void runPrometheeIIMethod() {
         LinkedHashMap<String, Double> prometheeIIRankingMap  = prometheeIIMethod.getAlternativesRanking();
         for (Map.Entry<String, Double> alternativeEntry : prometheeIIRankingMap.entrySet()) {
-            System.out.println("Alternative: " + alternativeEntry.getKey() + " netflow: " + alternativeEntry.getValue());
+            BigDecimal bdValue = new BigDecimal(alternativeEntry.getValue());
+            bdValue = bdValue.setScale(3, RoundingMode.HALF_UP);
+            System.out.println("Alternative: " + alternativeEntry.getKey() + " netflow: " + bdValue);
         }
+
+
     }
 }
