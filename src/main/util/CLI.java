@@ -41,8 +41,8 @@ public class CLI {
         chooseDataSetFrom(userInput);
         PreparationHelper.validateInputData();
         PreparationHelper.printLoadedData();
-        System.out.println("Data set successfully loaded");
-        //getPrometheeIIParamsFromUser();
+        System.out.println("\nData set successfully loaded");
+        getPrometheeIIParamsFromUser();
         startTime = System.currentTimeMillis();
         System.out.println("\nPerforming Promethee II method in progress...");
         PreparationHelper.runPrometheeIIMethod();
@@ -64,6 +64,10 @@ public class CLI {
 
     private static void getPrometheeIIParamsFromUser() {
         Scanner userInputStream = new Scanner(System.in);
+        System.out.println("\nDo you want to set the weights, preference and indifference thresholds manually? (Y/N)");
+        if(!userInputStream.nextLine().equals("Y")) {
+            return;
+        }
         HashMap<String, Double> criteriaWeightsMap = new HashMap<>();
         HashMap<String, Double> preferenceThresholdValuesMap = new HashMap<>();
         HashMap<String, Double> indifferenceThresholdValuesMap = new HashMap<>();
@@ -87,7 +91,7 @@ public class CLI {
     private static void setPreferenceAndIndifferenceThresholdsFrom(Scanner userInputStream, HashMap<String, Double> preferenceThresholdValuesMap, HashMap<String, Double> indifferenceThresholdValuesMap) {
         System.out.println("\nSetting indifference and preference thresholds");
         for (String criterion : PreparationHelper.getCriteriaList()) {
-            System.out.println("Up to which value of the difference for  " + criterion + " the alternatives are considered equal?");
+            System.out.println("\nUp to which value of the difference for  " + criterion + " the alternatives are considered equal?");
             if (userInputStream.hasNext()) {
                 indifferenceThresholdValuesMap.put(criterion, userInputStream.nextDouble());
                 userInputStream.nextLine();
