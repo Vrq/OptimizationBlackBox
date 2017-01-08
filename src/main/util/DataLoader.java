@@ -17,6 +17,7 @@ public class DataLoader {
     public DataLoader(String resourcesDirName) {
         this.resourcesDirName = resourcesDirName;
     }
+
     public ArrayList<List<String>> getDataMatrixFromCSV(String fileName) {
         ArrayList<List<String>> dataMatrix = new ArrayList<List<String>>();
         String filePath = FileSystems.getDefault().getPath(resourcesDirName, fileName).toAbsolutePath().toString();
@@ -50,6 +51,25 @@ public class DataLoader {
             e.printStackTrace();
         }
         return dataArray;
+    }
+
+    public List<Double> getDoubleDataListFromCSV(String fileName) {
+        List<Double> dataValuesList = new ArrayList<Double>();
+        String filePath = FileSystems.getDefault().getPath(resourcesDirName, fileName).toAbsolutePath().toString();
+        File file = new File(filePath);
+        try {
+            Scanner inputStream = new Scanner(file);
+            if(inputStream.hasNext()) {
+                String dataLine = inputStream.nextLine();
+                String[] dataLineArray = dataLine.split("(,)|(;)", -1);
+                for(String value : dataLineArray) {
+                    dataValuesList.add(Double.parseDouble(value));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return dataValuesList;
     }
 
     public ArrayList<List<Double>> getPerformanceTableFromCSV(String fileName) {

@@ -11,6 +11,19 @@ public class PrometheeIIMethod {
     List<String> criteriaList;
     List<String> alternativesList;
     HashMap<String, Double> criteriaWeightsMap;
+
+    public HashMap<String, Double> getPreferenceThresholdValuesMap() {
+        return preferenceThresholdValuesMap;
+    }
+
+    public HashMap<String, Double> getIndifferenceThresholdValuesMap() {
+        return indifferenceThresholdValuesMap;
+    }
+
+    public HashMap<String, Double> getCriteriaWeightsMap() {
+        return criteriaWeightsMap;
+    }
+
     HashMap<String, Double> preferenceThresholdValuesMap;
     HashMap<String, Double> indifferenceThresholdValuesMap;
     double weightsSumValue;

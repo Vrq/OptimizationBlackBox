@@ -15,34 +15,51 @@ public class CLI {
         do {
             switch (userInput.nextLine()) {
                 case "1":
-                    PreparationHelper.loadDefaultData();
-                    long startTime = System.currentTimeMillis();
-                    System.out.println("Performing Promethee II method in progress...");
-                    PreparationHelper.performExamplePrometheeIIRun();
-                    long stopTime = System.currentTimeMillis();
-                    double elapsedTimeSec = (stopTime - startTime)/1000d;
-                    System.out.println("\nPromethee II executed in: " + elapsedTimeSec + "s");
+                    performExamplePrometheeRun();
                     break;
                 case "2":
-                    chooseDataSetFrom(userInput);
-                    PreparationHelper.printLoadedData();
-                    System.out.println("Data set successfully loaded");
-                    getPrometheeIIParamsFromUser();
-                    startTime = System.currentTimeMillis();
-                    System.out.println("Performing Promethee II method in progress...");
-                    PreparationHelper.runPrometheeIIMethod();
-                    stopTime = System.currentTimeMillis();
-                    elapsedTimeSec = (stopTime - startTime)/1000d;
-                    System.out.println("\nPromethee II executed in: " + elapsedTimeSec + "s");
+                    performCustomizedPrometheeRun(userInput);
                     break;
                 default:
                     System.out.println("Unknown command, please try again");
             }
-            System.out.println("\nBelow you can find the available commands:");
-            System.out.println("1 - Example optimization process");
-            System.out.println("2 - Custom optimization with own data sources");
-            System.out.println("\nChoose your command and hit enter:");
+            printCommandMenu();
         } while (userInput.hasNext());
+    }
+
+    private static void printCommandMenu() {
+        System.out.println("\nBelow you can find the available commands:");
+        System.out.println("1 - Example optimization process");
+        System.out.println("2 - Custom optimization with own data sources");
+        System.out.println("\nChoose your command and hit enter:");
+    }
+
+    private static void performCustomizedPrometheeRun(Scanner userInput) {
+        long startTime;
+        long stopTime;
+        double elapsedTimeSec;
+        chooseDataSetFrom(userInput);
+        PreparationHelper.validateInputData();
+        PreparationHelper.printLoadedData();
+        System.out.println("Data set successfully loaded");
+        //getPrometheeIIParamsFromUser();
+        startTime = System.currentTimeMillis();
+        System.out.println("\nPerforming Promethee II method in progress...");
+        PreparationHelper.runPrometheeIIMethod();
+        stopTime = System.currentTimeMillis();
+        elapsedTimeSec = (stopTime - startTime)/1000d;
+        System.out.println("\nPromethee II executed in: " + elapsedTimeSec + "s");
+    }
+
+    private static void performExamplePrometheeRun() {
+        PreparationHelper.loadDefaultData();
+        PreparationHelper.printLoadedData();
+        long startTime = System.currentTimeMillis();
+        System.out.println("\nPerforming Promethee II method in progress...");
+        PreparationHelper.performExamplePrometheeIIRun();
+        long stopTime = System.currentTimeMillis();
+        double elapsedTimeSec = (stopTime - startTime)/1000d;
+        System.out.println("\nPromethee II executed in: " + elapsedTimeSec + "s");
     }
 
     private static void getPrometheeIIParamsFromUser() {
@@ -93,7 +110,6 @@ public class CLI {
         System.out.println("Choose the data set to be used:");
         System.out.println("1 - Cars data set");
         System.out.println("2 - Germany credit data set");
-        System.out.println("3 - Australian credit card data set");
         System.out.println("0 - Back to main menu");
         System.out.println("\nChoose a data set number and hit enter:");
         int chosenNumber = userInput.nextInt();
@@ -108,9 +124,6 @@ public class CLI {
                 break;
             case 2:
                 PreparationHelper.loadDataSet(Constants.getGermanCreditDataSet());
-                break;
-            case 3:
-                PreparationHelper.loadDataSet(Constants.getAustralianCreditDataSet());
                 break;
             default:
                 System.out.println("Back to main menu");
